@@ -8,32 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var selection = 0
+    @State var selectedTab: Int = 0
     var body: some View {
         ZStack{
             VStack {
-                TabView (selection: $selection){
-                    homeView()
-                        .tag(0)
+                TabView (selection: $selectedTab){
+                    homeView(selectedTab: $selectedTab)
+                        .tag(1)
                         .tabItem {
                             Image(systemName: "house")
                             Text("ホーム")
                                 
                         }
-                    searchView()
-                        .tag(1)
+                    searchView(selectedTab: $selectedTab)
+                        .tag(2)
                         .tabItem {
                             Image(systemName: "magnifyingglass")
                             Text("検索")
                         }
-                    phoneView()
-                        .tag(2)
+                    phoneView(selectedTab: $selectedTab)
+                        .tag(3)
                         .tabItem {
                             Image(systemName: "phone")
                             Text("電話")
                         }
-                    messageView()
-                        .tag(3)
+                    messageView(selectedTab: $selectedTab)
+                        .tag(4)
                         .tabItem {
                             Image(systemName: "message")
                             Text("メッセージ")

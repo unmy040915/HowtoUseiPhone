@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct messageView: View {
+    @Binding var selectedTab : Int
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    messageView()
+    messageView(selectedTab: .constant(4))
 }

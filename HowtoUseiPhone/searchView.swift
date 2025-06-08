@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct searchView: View {
+    @Binding var selectedTab : Int
     @State private var searchTextTop = ""
     @State private var searchTextBottom = ""
     var body: some View {
@@ -15,7 +16,7 @@ struct searchView: View {
             VStack{
                 Text("次の試練")
                     .font(.title)
-                Text("クエスト名")
+                Text("\(task)")
                     .font(.system(size:32))
                 ZStack{
                     RoundedRectangle(cornerRadius: 8)
@@ -78,5 +79,5 @@ struct searchView: View {
 }
 
 #Preview {
-    searchView()
+    searchView(selectedTab: .constant(2))
 }
