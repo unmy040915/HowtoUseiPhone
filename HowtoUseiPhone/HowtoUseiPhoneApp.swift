@@ -11,7 +11,7 @@ import SwiftUI
 struct HowtoUseiPhoneApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(task: .constant(.init()))
         }
     }
 }

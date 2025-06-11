@@ -1,23 +1,18 @@
-//
-//  searchView.swift
-//  HowtoUseiPhone
-//
-//  Created by 牟禮優汰 on 2025/06/07.
-//
-
 import SwiftUI
 
 struct searchView: View {
     @Binding var selectedTab : Int
+    @Binding var task: String
     @State private var searchTextTop = ""
     @State private var searchTextBottom = ""
     var body: some View {
         ZStack{
             VStack{
-                Text("次の試練")
-                    .font(.title)
-                Text("\(task)")
-                    .font(.system(size:32))
+                TaskView(task: $task)
+                Image("google")
+                    .resizable()
+                    .scaledToFit()
+                    .frame( height: 100)
                 ZStack{
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color(red: 239 / 255,
@@ -79,5 +74,5 @@ struct searchView: View {
 }
 
 #Preview {
-    searchView(selectedTab: .constant(2))
+    searchView(selectedTab: .constant(2), task: .constant(.init()))
 }
