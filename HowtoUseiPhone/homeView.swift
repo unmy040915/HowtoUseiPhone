@@ -10,20 +10,9 @@ struct homeView: View {
     @Binding var selectedTab : Int
     @Binding var task: String
     @Binding var tasks: [Task] 
-    
-    @State var callTasks: [Task] = [
-        Task(title: "電話をかけよう", isDone: false),
-        Task(title: "電話を取ろう", isDone: false),
-        Task(title: "電話を切ろう", isDone: false)
-    ]
-    
-    @State var messageTasks: [Task] = [
-        Task(title: "メッセージを送信しよう", isDone: false),
-        Task(title: "画像を送信しよう", isDone: false),
-        Task(title: "画像の保存をしよう", isDone: false),
-        Task(title: "コピーアンドペーストをしよう", isDone: false),
-        Task(title: "文字の取り消し操作をしよう", isDone: false)
-    ]
+    @Binding var callTasks: [Task]
+    @Binding var messageTasks: [Task]
+
     
     var body: some View {
         ZStack {
@@ -110,5 +99,5 @@ struct homeView: View {
 
 
 #Preview {
-    homeView(selectedTab: .constant(1), task: .constant(.init()), tasks: .constant([]))
+    homeView(selectedTab: .constant(1), task: .constant(.init()), tasks: .constant([]), callTasks: .constant([]),messageTasks: .constant([]))
 }

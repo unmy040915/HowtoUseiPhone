@@ -1,15 +1,5 @@
 import SwiftUI
 import TipKit
-struct SearchTip: Tip {
-    @Parameter static var isTaskSearch: Bool = false
-    var title: Text{ Text("ここをタップして検索")
-    }
-    var rules: [Rule] {
-            [
-                #Rule(Self.$isTaskSearch) { $0 == true }
-            ]
-        }
-}
 
 struct searchView: View {
     @Binding var selectedTab : Int
@@ -18,7 +8,8 @@ struct searchView: View {
     @State private var searchTextBottom = ""
     @FocusState private var focusedField: Field?
     @Binding var tasks: [Task]
-
+    @State private var selectedImageName: String? = nil
+    
     var body: some View {
         ZStack{
             VStack{
@@ -42,9 +33,9 @@ struct searchView: View {
                             .submitLabel(.go)
                             .onSubmit {
                                 if task == "文字を入れて検索しよう" {
-                                            markTaskDone(with: task)
-                                        }
-                                            }
+                                    markTaskDone(with: task)
+                                }
+                            }
                     }
                     .focused($focusedField, equals: .Top)
                     .onTapGesture {
@@ -53,39 +44,62 @@ struct searchView: View {
                 }
                 .padding(.horizontal)
                 TipView(SearchTip(), arrowEdge: .top)
-                    .padding()
+                    .padding(.horizontal)
+                TipView(AdvertisementTip(), arrowEdge: .bottom)
+                    .padding(.horizontal)
                 ScrollView{
-                    Image("ImageSearchViewWoman")
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(15)
-                        .padding()
-                    Image("ImageSearchViewMan")
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(15)
-                        .padding(.horizontal)
-                        .padding(.bottom)
+                    Button(action:{
+                        selectedImageName = "ImageSearchViewWoman"
+                    }){
+                        Image("ImageSearchViewWoman")
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(15)
+                            .padding()
+                    }
+                    Button(action:{
+                        selectedImageName = "ImageSearchViewMan"
+                    }){
+                        Image("ImageSearchViewMan")
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(15)
+                            .padding(.horizontal)
+                            .padding(.bottom)
+                    }
+                    
                 }
                 
             }
             .task {
-                        try? Tips.configure([
-                            .datastoreLocation(.applicationDefault)
-                        ])
-                if task == "文字を入れて検索しよう" && tasks[0].isDone == false{
-                        SearchTip.isTaskSearch = true
+                try? Tips.configure([
+                    .datastoreLocation(.applicationDefault)
+                ])
+                if task == "広告を削除しよう" && tasks[1].isDone == false{
+                    AdvertisementTip.isTaskAdvertisement = true
                     try? Tips.resetDatastore()
-                    }else {
-                        SearchTip.isTaskSearch = false 
-                    }
-                    }
+                }else {
+                    AdvertisementTip.isTaskAdvertisement = false
+                }
+            }
+            .task {
+                try? Tips.configure([
+                    .datastoreLocation(.applicationDefault)
+                ])
+                if task == "文字を入れて検索しよう" && tasks[0].isDone == false{
+                    SearchTip.isTaskSearch = true
+                    try? Tips.resetDatastore()
+                }else {
+                    SearchTip.isTaskSearch = false
+                }
+            
+            }
             VStack{
                 Spacer()
                     .frame(width: 0)
                 
                 TipView(SearchTip(), arrowEdge: .bottom)
-                    .padding()
+                    .padding(.horizontal)
                 ZStack{
                     Rectangle()
                         .fill(Color(red: 243 / 255, green: 243 / 255, blue: 243 / 255))
@@ -105,6 +119,11 @@ struct searchView: View {
                                 focusedField = .Bottom
                             }
                             .submitLabel(.go)
+                            .onSubmit {
+                                if task == "文字を入れて検索しよう" {
+                                    markTaskDone(with: task)
+                                }
+                            }
                         //検索/webサイト名を入力こいつを真ん中にしたい
                     }
                     .padding(.horizontal, 16) // 左右に余白を設定
@@ -115,8 +134,57 @@ struct searchView: View {
                     }
                 }
             }
+            if let imageName = selectedImageName {
+                ZStack{
+                    Color.black.opacity(0.6)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack{
+                        ZStack(alignment: .topTrailing){
+                            Image(imageName)
+                                .resizable()
+                                .scaledToFit()
+                                .background(Color.white)
+                                .cornerRadius(12)
+                                .shadow(radius: 10)
+                                .padding()
+                                .padding(.top,150)
+                            
+                            Button(action: {
+                                selectedImageName = nil
+                                if task == "広告を削除しよう" {
+                                    markTaskDone(with: task)
+                                }
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 32, height: 32)
+                                    .foregroundColor(.black)
+                                    .padding()
+                                    .padding(.top,150)
+                            }
+                        }
+                        TipView(CrossTip(), arrowEdge: .top)
+                            .padding(.horizontal)
+                    }
+                    .task {
+                        try? Tips.configure([
+                            .datastoreLocation(.applicationDefault)
+                        ])
+                        if task == "広告を削除しよう" && tasks[1].isDone == false{
+                            CrossTip.isCross = true
+                            try? Tips.resetDatastore()
+                        }else {
+                           CrossTip.isCross = false
+                        }
+                    
+                    }
+                }
+                .transition(.opacity)
+                .zIndex(1)
+            }
         }
-
+        
         .contentShape(RoundedRectangle(cornerRadius: 10))
         .onTapGesture {
             focusedField = nil

@@ -9,11 +9,24 @@ struct ContentView: View {
         Task(title: "広告を削除しよう", isDone: false),
         Task(title: "拡大縮小しよう", isDone: false)
     ]
+    @State var callTasks: [Task] = [
+        Task(title: "電話をかけよう", isDone: false),
+        Task(title: "電話を取ろう", isDone: false),
+        Task(title: "電話を切ろう", isDone: false)
+    ]
+    
+    @State var messageTasks: [Task] = [
+        Task(title: "メッセージを送信しよう", isDone: false),
+        Task(title: "画像を送信しよう", isDone: false),
+        Task(title: "画像の保存をしよう", isDone: false),
+        Task(title: "コピーアンドペーストをしよう", isDone: false),
+        Task(title: "文字の取り消し操作をしよう", isDone: false)
+    ]
     var body: some View {
         ZStack{
             VStack {
                 TabView (selection: $selectedTab){
-                    homeView(selectedTab: $selectedTab, task: $task, tasks: $tasks)
+                    homeView(selectedTab: $selectedTab, task: $task, tasks: $tasks, callTasks:$callTasks, messageTasks:$messageTasks)
                         .tag(1)
                         .tabItem {
                             Image(systemName: "house")
