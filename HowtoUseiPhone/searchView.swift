@@ -1,4 +1,15 @@
 import SwiftUI
+import TipKit
+struct SearchTip: Tip {
+    @Parameter static var isTaskSearch: Bool = false
+    var title: Text{ Text("ここをタップして検索")
+    }
+    var rules: [Rule] {
+            [
+                #Rule(Self.$isTaskSearch) { $0 == true }
+            ]
+        }
+}
 
 struct searchView: View {
     @Binding var selectedTab : Int
@@ -6,6 +17,8 @@ struct searchView: View {
     @State private var searchTextTop = ""
     @State private var searchTextBottom = ""
     @FocusState private var focusedField: Field?
+    @Binding var tasks: [Task]
+
     var body: some View {
         ZStack{
             VStack{
@@ -25,7 +38,13 @@ struct searchView: View {
                             .frame(width: 0)
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
-                        TextField("検索", text: $searchTextTop);
+                        TextField("検索", text: $searchTextTop)
+                            .submitLabel(.go)
+                            .onSubmit {
+                                if task == "文字を入れて検索しよう" {
+                                            markTaskDone(with: task)
+                                        }
+                                            }
                     }
                     .focused($focusedField, equals: .Top)
                     .onTapGesture {
@@ -33,6 +52,8 @@ struct searchView: View {
                     }
                 }
                 .padding(.horizontal)
+                TipView(SearchTip(), arrowEdge: .top)
+                    .padding()
                 ScrollView{
                     Image("ImageSearchViewWoman")
                         .resizable()
@@ -48,9 +69,23 @@ struct searchView: View {
                 }
                 
             }
+            .task {
+                        try? Tips.configure([
+                            .datastoreLocation(.applicationDefault)
+                        ])
+                if task == "文字を入れて検索しよう" && tasks[0].isDone == false{
+                        SearchTip.isTaskSearch = true
+                    try? Tips.resetDatastore()
+                    }else {
+                        SearchTip.isTaskSearch = false 
+                    }
+                    }
             VStack{
                 Spacer()
                     .frame(width: 0)
+                
+                TipView(SearchTip(), arrowEdge: .bottom)
+                    .padding()
                 ZStack{
                     Rectangle()
                         .fill(Color(red: 243 / 255, green: 243 / 255, blue: 243 / 255))
@@ -69,6 +104,7 @@ struct searchView: View {
                             .onTapGesture {
                                 focusedField = .Bottom
                             }
+                            .submitLabel(.go)
                         //検索/webサイト名を入力こいつを真ん中にしたい
                     }
                     .padding(.horizontal, 16) // 左右に余白を設定
@@ -91,9 +127,14 @@ struct searchView: View {
         case Top
         case Bottom
     }
+    func markTaskDone(with title: String) {
+        if let index = tasks.firstIndex(where: { $0.title == title }) {
+            tasks[index].isDone = true
+        }
+    }
 }
 
 #Preview {
-    searchView(selectedTab: .constant(2), task: .constant("タスクを選択しよう"))
+    searchView(selectedTab: .constant(2), task: .constant("タスクを選択しよう"), tasks: .constant([]))
 }
 

@@ -9,11 +9,7 @@ struct Task: Identifiable {
 struct homeView: View {
     @Binding var selectedTab : Int
     @Binding var task: String
-    @State var tasks: [Task] = [
-        Task(title: "文字を入れて検索しよう", isDone: false),
-        Task(title: "広告を削除しよう", isDone: false),
-        Task(title: "拡大縮小しよう", isDone: false)
-    ]
+    @Binding var tasks: [Task] 
     
     @State var callTasks: [Task] = [
         Task(title: "電話をかけよう", isDone: false),
@@ -114,5 +110,5 @@ struct homeView: View {
 
 
 #Preview {
-    homeView(selectedTab: .constant(1), task: .constant(.init()))
+    homeView(selectedTab: .constant(1), task: .constant(.init()), tasks: .constant([]))
 }

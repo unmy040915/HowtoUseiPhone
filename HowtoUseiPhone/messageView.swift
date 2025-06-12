@@ -8,7 +8,7 @@ struct messageView: View {
     @State private var messages: [String] = []
     @State private var receivedImages: [Image] = [Image("dog")]
     @FocusState private var isInputFocused: Bool
-    
+    @FocusState private var focusedField: Field?
     var body: some View {
         ZStack{
             VStack{
@@ -49,12 +49,15 @@ struct messageView: View {
                                     Spacer()
                                     Text(messages[index])
                                         .padding()
-                                        .background(Color.blue)
+                                        .background(Color.green)
                                         .foregroundColor(.white)
                                         .cornerRadius(12)
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             }
+                            Color.clear
+                                .frame(height: 1)
+                                .id("bottom")
                         }
                         .padding()
                     }
@@ -63,31 +66,73 @@ struct messageView: View {
                             proxy.scrollTo(messages.indices.last, anchor: .bottom)
                         }
                     }
+                    .onChange(of: isInputFocused) { newValue in
+                        if newValue {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation {
+                                    proxy.scrollTo("bottom", anchor: .bottom)
+                                }
+                            }
+                        }
+                    }
                 }
                 
-                HStack {
+                HStack (spacing: 0){
+                    Button(action: {
+                        
+                    }){
+                        Image(systemName: "photo")
+                            .font(.system(size:30))
+                            .foregroundColor(Color.gray)
+                            .padding(.trailing,5)
+                    }
                     ZStack{
                         Rectangle()
-                            .fill(Color.gray)
+                            .fill(Color.white)
                             .frame(width: 300, height: 40)
-                            .cornerRadius(12)
-                        TextField("メッセージを入力", text: $messageText)
-                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.gray, lineWidth: 2)
+                            )
+                        
+                        TextField("テキストメッセージ", text: $messageText)
                             .focused($isInputFocused)
+                            .frame(width: 280, height: 35)
+                            .padding(.leading)
+                            .focused($focusedField, equals: .field)
+                            .onTapGesture {
+                                focusedField = .field
+                                isInputFocused = true
+                            }
+                        
                     }
                     
-                    Button("送信") {//入力されたら現れるようにしたい．
-                        guard !messageText.isEmpty else { return }
-                        messages.append(messageText)
-                        messageText = ""
+                    if isInputFocused {
+                        Button(action:{
+                            guard !messageText.isEmpty else { return }
+                            messages.append(messageText)
+                            messageText = ""
+                            isInputFocused = false // 入力終了後フォーカス外す
+                        }){ Image(systemName: "arrow.up.circle.fill")
+                                .foregroundColor(Color.green)
+                                .font(.system(size:30))
+                        }
+                        .padding(.leading,5)
+                            .transition(.move(edge: .trailing).combined(with: .opacity))
+                            .animation(.easeInOut, value: isInputFocused)
                     }
-                    .padding(.horizontal)
                 }
-                .padding()
+                .padding(.horizontal)
+                
             }
         }
+        .onTapGesture {
+            focusedField = nil
+        }
     }
-    
+    enum Field: Hashable {
+        case field
+    }
 }
 
 
