@@ -6,23 +6,54 @@ struct messageView: View {
     
     @State private var messageText: String = ""
     @State private var messages: [String] = []
+    @State private var receivedImages: [Image] = [Image("dog")]
     @FocusState private var isInputFocused: Bool
     
     var body: some View {
         ZStack{
             VStack{
                 TaskView(task: $task)
+                Text("山田太郎")
+                    .font(.title)
+                Divider()
                 ScrollViewReader { proxy in
                     ScrollView {
-                        VStack(alignment: .trailing, spacing: 8) {
-                            ForEach(messages.indices, id: \.self) { index in
-                                Text(messages[index])
+                        VStack(alignment: .leading, spacing: 8) {
+                            ForEach(receivedImages.indices, id: \.self) { index in
+                                HStack(alignment: .top, spacing: 8) {
+                                    Image(systemName: "person.circle")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                    receivedImages[index]
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 200)
+                                        .cornerRadius(12)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            HStack(alignment: .top, spacing: 8) {
+                                Image(systemName: "person.circle")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                Text("このテキストをコピーしよう")
                                     .padding()
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
+                                    .background(Color.gray.opacity(0.2))
+                                    .foregroundColor(.black)
                                     .cornerRadius(12)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                    .id(index)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            ForEach(messages.indices, id: \.self) { index in
+                                HStack(alignment: .top, spacing: 8) {
+                                    Spacer()
+                                    Text(messages[index])
+                                        .padding()
+                                        .background(Color.blue)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(12)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
                         .padding()
@@ -35,11 +66,17 @@ struct messageView: View {
                 }
                 
                 HStack {
-                    TextField("メッセージを入力", text: $messageText)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .focused($isInputFocused)
+                    ZStack{
+                        Rectangle()
+                            .fill(Color.gray)
+                            .frame(width: 300, height: 40)
+                            .cornerRadius(12)
+                        TextField("メッセージを入力", text: $messageText)
+                            .cornerRadius(12)
+                            .focused($isInputFocused)
+                    }
                     
-                    Button("送信") {
+                    Button("送信") {//入力されたら現れるようにしたい．
                         guard !messageText.isEmpty else { return }
                         messages.append(messageText)
                         messageText = ""

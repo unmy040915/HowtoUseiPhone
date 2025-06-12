@@ -3,7 +3,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedTab: Int = 0
-    @Binding var task: String
+    @State private var task = "タスクを選択しよう"
+    
     var body: some View {
         ZStack{
             VStack {
@@ -41,7 +42,7 @@ struct ContentView: View {
     
 #Preview {
     StatefulPreviewWrapper("広告を削除しよう") { task in
-        ContentView(task: task)
+        ContentView()
     }
 }
 

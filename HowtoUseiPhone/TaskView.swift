@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TaskView: View {
-    @Binding var task: String
+    @Binding var task: String 
     var body: some View {
         
-        Text("次の試練")
+        Text("次のクエスト")
             .font(.title)
         Text("\(task)")
             .font(.system(size:32))
