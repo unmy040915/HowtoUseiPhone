@@ -1,10 +1,3 @@
-//
-//  tipsView.swift
-//  HowtoUseiPhone
-//
-//  Created by 牟禮優汰 on 2025/06/13.
-//
-
 import SwiftUI
 
 import TipKit

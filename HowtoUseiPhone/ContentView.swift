@@ -56,7 +56,7 @@ struct ContentView: View {
     }
 }
 
-    
+
 #Preview {
     StatefulPreviewWrapper("広告を削除しよう") { task in
         ContentView()

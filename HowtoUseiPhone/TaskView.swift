@@ -1,10 +1,3 @@
-//
-//  TaskView.swift
-//  HowtoUseiPhone
-//
-//  Created by 牟禮優汰 on 2025/06/10.
-//
-
 import SwiftUI
 
 struct TaskView: View {
