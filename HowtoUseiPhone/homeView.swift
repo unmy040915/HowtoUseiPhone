@@ -13,6 +13,7 @@ struct homeView: View {
     @Binding var callTasks: [Task]
     @Binding var messageTasks: [Task]
 
+    @State private var isTakeCallActive = false
     
     var body: some View {
         ZStack {
@@ -25,7 +26,7 @@ struct homeView: View {
                     // 調べ物セクション
                     Section {
                         ForEach($tasks) { $task in
-                            taskButton(task: $task, selectedTab: 2)
+                            taskButton(task: $task, selectedTab: 2, isTakeCallActive: $isTakeCallActive)
                         }
                     } header: {
                         Text("調べ物")
@@ -36,7 +37,7 @@ struct homeView: View {
                     // 電話セクション
                     Section {
                         ForEach($callTasks) { $task in
-                            taskButton(task: $task, selectedTab: 3)
+                            taskButton(task: $task, selectedTab: 3, isTakeCallActive: $isTakeCallActive)
                         }
                     } header: {
                         Text("電話")
@@ -47,7 +48,7 @@ struct homeView: View {
                     // メッセージセクション
                     Section {
                         ForEach($messageTasks) { $task in
-                            taskButton(task: $task, selectedTab: 4)
+                            taskButton(task: $task, selectedTab: 4, isTakeCallActive: $isTakeCallActive)
                         }
                     } header: {
                         Text("メッセージ")
@@ -57,16 +58,25 @@ struct homeView: View {
                 }
                 .scrollContentBackground(.hidden)
                 .background(Color.white)
+                
+                NavigationLink(destination: TakeCall(tasks: $callTasks, task: $task), isActive: $isTakeCallActive) {
+                    EmptyView()
+                }
             }
         }
     }
 
     // 共通のボタン表示ビュー
     @ViewBuilder
-    private func taskButton(task: Binding<Task>, selectedTab: Int) -> some View {
+    private func taskButton(task: Binding<Task>, selectedTab: Int, isTakeCallActive: Binding<Bool>) -> some View {
         Button(action: {
             self.selectedTab = selectedTab
             self.task = task.wrappedValue.title
+            if self.task == "電話を取ろう" {
+                // 通話画面などを表示するために NavigationLink を使う場合
+                // ここで任意の状態を切り替えるだけにして、別の場所でビューを表示
+                isTakeCallActive.wrappedValue = true
+            }
         }) {
             HStack {
                 if task.wrappedValue.isDone {

@@ -93,4 +93,14 @@ struct hungUpTip: Tip {
         ]
     }
 }
+struct takeCallTip: Tip {
+    @Parameter static var isTakeCall: Bool = false
+    var title: Text{ Text("ここをタップして電話を取る")
+    }
+    var rules: [Rule] {
+        [
+            #Rule(Self.$isTakeCall) { $0 == true }
+        ]
+    }
+}
 

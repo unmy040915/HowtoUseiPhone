@@ -23,33 +23,35 @@ struct ContentView: View {
 //        Task(title: "文字の取り消し操作をしよう", isDone: false)
     ]
     var body: some View {
-        ZStack{
-            VStack {
-                TabView (selection: $selectedTab){
-                    homeView(selectedTab: $selectedTab, task: $task, tasks: $tasks, callTasks:$callTasks, messageTasks:$messageTasks)
-                        .tag(1)
-                        .tabItem {
-                            Image(systemName: "house")
-                            Text("ホーム")
-                        }
-                    searchView(selectedTab: $selectedTab, task: $task, tasks: $tasks)
-                        .tag(2)
-                        .tabItem {
-                            Image(systemName: "magnifyingglass")
-                            Text("検索")
-                        }
-                    phoneView(selectedTab: $selectedTab, task: $task,tasks: $callTasks)
-                        .tag(3)
-                        .tabItem {
-                            Image(systemName: "phone")
-                            Text("電話")
-                        }
-                    messageView(selectedTab: $selectedTab, task: $task, tasks: $messageTasks)
-                        .tag(4)
-                        .tabItem {
-                            Image(systemName: "message")
-                            Text("メッセージ")
-                        }
+        NavigationStack {
+            ZStack{
+                VStack {
+                    TabView (selection: $selectedTab){
+                        homeView(selectedTab: $selectedTab, task: $task, tasks: $tasks, callTasks:$callTasks, messageTasks:$messageTasks)
+                            .tag(1)
+                            .tabItem {
+                                Image(systemName: "house")
+                                Text("ホーム")
+                            }
+                        searchView(selectedTab: $selectedTab, task: $task, tasks: $tasks)
+                            .tag(2)
+                            .tabItem {
+                                Image(systemName: "magnifyingglass")
+                                Text("検索")
+                            }
+                        phoneView(selectedTab: $selectedTab, task: $task,tasks: $callTasks)
+                            .tag(3)
+                            .tabItem {
+                                Image(systemName: "phone")
+                                Text("電話")
+                            }
+                        messageView(selectedTab: $selectedTab, task: $task, tasks: $messageTasks)
+                            .tag(4)
+                            .tabItem {
+                                Image(systemName: "message")
+                                Text("メッセージ")
+                            }
+                    }
                 }
             }
         }
