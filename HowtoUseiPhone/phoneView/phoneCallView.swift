@@ -1,11 +1,5 @@
-//
-//  phoneCallView.swift
-//  HowtoUseiPhone
-//
-//  Created by 牟禮優汰 on 2025/06/17.
-//
-
 import SwiftUI
+import TipKit
 
 struct phoneCallView: View {
     @Environment(\.dismiss) var dismiss
@@ -59,16 +53,29 @@ struct phoneCallView: View {
                                 .foregroundColor(.white)
                                 .font(.title)
                         }
+                        .popoverTip(hungUpTip())
                     }
                 }
                 .padding()
+            }
+            .sheet(isPresented: $showCompletePopup) {
+                TaskCompletePopupView()
             }
             
             
             
         }
-        .sheet(isPresented: $showCompletePopup) {
-            TaskCompletePopupView()
+        .task {
+            try? Tips.configure([
+                .datastoreLocation(.applicationDefault)
+            ])
+            if task == "電話を切ろう" && tasks[2].isDone == false{
+                hungUpTip.isHungUp = true
+                try? Tips.resetDatastore()
+            }else {
+                hungUpTip.isHungUp = false
+            }
+            
         }
     }
     public func markTaskDone(with title: String) {

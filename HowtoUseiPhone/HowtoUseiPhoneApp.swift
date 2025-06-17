@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct HowtoUseiPhoneApp: App {
@@ -6,5 +7,6 @@ struct HowtoUseiPhoneApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Todo.self)
     }
 }

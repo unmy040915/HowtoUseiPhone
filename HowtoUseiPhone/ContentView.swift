@@ -7,7 +7,7 @@ struct ContentView: View {
     @State var tasks: [Task] = [
         Task(title: "文字を入れて検索しよう", isDone: false),
         Task(title: "広告を削除しよう", isDone: false),
-        Task(title: "拡大縮小しよう", isDone: false)
+//        Task(title: "拡大縮小しよう", isDone: false)
     ]
     @State var callTasks: [Task] = [
         Task(title: "電話をかけよう", isDone: false),
@@ -18,9 +18,9 @@ struct ContentView: View {
     @State var messageTasks: [Task] = [
         Task(title: "メッセージを送信しよう", isDone: false),
         Task(title: "画像を送信しよう", isDone: false),
-        Task(title: "画像の保存をしよう", isDone: false),
+//        Task(title: "画像の保存をしよう", isDone: false),
         Task(title: "コピー&ペーストをしよう", isDone: false),
-        Task(title: "文字の取り消し操作をしよう", isDone: false)
+//        Task(title: "文字の取り消し操作をしよう", isDone: false)
     ]
     var body: some View {
         ZStack{

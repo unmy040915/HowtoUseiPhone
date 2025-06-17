@@ -54,7 +54,7 @@ struct ChatMessageView: View {
             try? Tips.configure([
                 .datastoreLocation(.applicationDefault)
             ])
-            if task == "コピー&ペーストをしよう" && tasks[3].isDone == false{
+            if task == "コピー&ペーストをしよう" && tasks[2].isDone == false{
                 copyTip.isCopySend = true
                 try? Tips.resetDatastore()
             }else {

@@ -1,4 +1,5 @@
 import SwiftUI
+import TipKit
 
 struct hanakoView: View {
     @State private var isPhoneCallActive = false
@@ -6,7 +7,7 @@ struct hanakoView: View {
     let name: String
     @Binding var tasks: [Task]
     @State private var showCompletePopup = false
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -19,17 +20,17 @@ struct hanakoView: View {
                             .resizable()
                             .frame(width: 100, height: 100)
                             .foregroundColor(.gray)
-
+                        
                         Text(katakanaName(from: name))
                             .font(.caption)
                             .foregroundColor(.gray)
-
+                        
                         Text(name)
                             .font(.title)
                             .fontWeight(.bold)
-
+                        
                         Spacer().frame(height: 24)
-
+                        
                         HStack(spacing: 20) {
                             ContactButton(icon: "message.fill", label: "メッセージ")
                             ContactButton(icon: "phone.fill", label: "発信", disabled: false, action: {
@@ -38,14 +39,28 @@ struct hanakoView: View {
                                     markTaskDone(with: task)
                                 }
                             })
+                            .popoverTip(callTip())
                             ContactButton(icon: "video.fill", label: "ビデオ通話", disabled: true)
                             ContactButton(icon: "envelope.fill", label: "メール", disabled: true)
+                        }
+                        .task {
+                            try? Tips.configure([
+                                .datastoreLocation(.applicationDefault)
+                            ])
+                            if task == "電話をかけよう" && tasks[0].isDone == false{
+                                callTip.isCall = true
+                                try? Tips.resetDatastore()
+                            }else {
+                                callTip.isCall = false
+                            }
+                            
                         }
                     }
                     .padding()
                     List {}
                 }
-
+                
+                
                 NavigationLink(destination: phoneCallView(task: $task, tasks: $tasks, name: name), isActive: $isPhoneCallActive) {
                     EmptyView()
                 }
@@ -56,7 +71,7 @@ struct hanakoView: View {
         }
         
     }
-
+    
     // 名前に応じたカタカナ表記（仮）
     func katakanaName(from name: String) -> String {
         switch name {
@@ -74,7 +89,7 @@ struct hanakoView: View {
             showCompletePopup = true
         }
     }
-
+    
     struct ContactButton: View {
         let icon: String
         let label: String

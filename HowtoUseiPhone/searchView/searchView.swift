@@ -209,3 +209,4 @@ struct searchView: View {
 #Preview {
     searchView(selectedTab: .constant(2), task: .constant("タスクを選択しよう"), tasks: .constant([]))
 }
+

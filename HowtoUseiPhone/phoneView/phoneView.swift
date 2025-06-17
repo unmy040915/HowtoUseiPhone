@@ -6,6 +6,7 @@ struct phoneView: View {
     let names = ["山田太郎", "山田花子"]
     @State private var selectedName: String? = nil
     @Binding var tasks: [Task]
+    @State private var showCompletePopup = false
     
     var body: some View {
         NavigationStack {
@@ -44,6 +45,10 @@ struct phoneView: View {
                     .listRowInsets(EdgeInsets())
                     .padding(.trailing)
                 }
+                
+            }
+            .sheet(isPresented: $showCompletePopup) {
+                TaskCompletePopupView()
             }
             .navigationDestination(item: $selectedName) { name in
                 hanakoView(task: $task, name: name,tasks: $tasks)
@@ -57,6 +62,7 @@ struct phoneView: View {
         }
     }
 }
+
 
 
 extension String: Identifiable {

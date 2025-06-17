@@ -156,7 +156,7 @@ struct messageView: View {
                 try? Tips.configure([
                     .datastoreLocation(.applicationDefault)
                 ])
-                if task == "コピー&ペーストをしよう" && tasks[3].isDone == false{
+                if task == "コピー&ペーストをしよう" && tasks[2].isDone == false{
                     pasteTip.isPasteSend = true
                     try? Tips.resetDatastore()
                 }else {
@@ -165,11 +165,11 @@ struct messageView: View {
                 
             }
         }
-        .onTapGesture {
-            focusedField = nil
-        }
         .sheet(isPresented: $showCompletePopup) {
             TaskCompletePopupView()
+        }
+        .onTapGesture {
+            focusedField = nil
         }
     }
     func sendMessage() {

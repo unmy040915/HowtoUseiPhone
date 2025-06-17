@@ -73,3 +73,24 @@ struct pasteTip: Tip {
         ]
     }
 }
+struct callTip: Tip {
+    @Parameter static var isCall: Bool = false
+    var title: Text{ Text("ここをタップして電話をかける")
+    }
+    var rules: [Rule] {
+        [
+            #Rule(Self.$isCall) { $0 == true }
+        ]
+    }
+}
+struct hungUpTip: Tip {
+    @Parameter static var isHungUp: Bool = false
+    var title: Text{ Text("ここをタップして電話を切る")
+    }
+    var rules: [Rule] {
+        [
+            #Rule(Self.$isHungUp) { $0 == true }
+        ]
+    }
+}
+
