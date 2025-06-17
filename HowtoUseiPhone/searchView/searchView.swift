@@ -9,6 +9,7 @@ struct searchView: View {
     @FocusState private var focusedField: Field?
     @Binding var tasks: [Task]
     @State private var selectedImageName: String? = nil
+    @State private var showCompletePopup = false
     
     var body: some View {
         ZStack{
@@ -184,10 +185,12 @@ struct searchView: View {
                 .zIndex(1)
             }
         }
-        
-        .contentShape(RoundedRectangle(cornerRadius: 10))
+        .contentShape(Rectangle())
         .onTapGesture {
             focusedField = nil
+        }
+        .sheet(isPresented: $showCompletePopup) {
+            TaskCompletePopupView()
         }
     }
     
@@ -198,6 +201,7 @@ struct searchView: View {
     public func markTaskDone(with title: String) {
         if let index = tasks.firstIndex(where: { $0.title == title }) {
             tasks[index].isDone = true
+            showCompletePopup = true
         }
     }
 }
@@ -205,4 +209,3 @@ struct searchView: View {
 #Preview {
     searchView(selectedTab: .constant(2), task: .constant("タスクを選択しよう"), tasks: .constant([]))
 }
-

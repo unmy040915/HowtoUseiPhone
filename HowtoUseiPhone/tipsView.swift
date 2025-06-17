@@ -52,7 +52,7 @@ struct ImageSendTip: Tip {
     }
 }
 
-struct copyPasteTip: Tip {
+struct copyTip: Tip {
     @Parameter static var isCopySend: Bool = false
     var title: Text{ Text("ここを長押ししてコピー")
     }

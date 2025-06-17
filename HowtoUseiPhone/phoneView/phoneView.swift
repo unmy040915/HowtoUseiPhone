@@ -5,6 +5,7 @@ struct phoneView: View {
     @Binding var task: String
     let names = ["山田太郎", "山田花子"]
     @State private var selectedName: String? = nil
+    @Binding var tasks: [Task]
     
     var body: some View {
         NavigationStack {
@@ -45,7 +46,7 @@ struct phoneView: View {
                 }
             }
             .navigationDestination(item: $selectedName) { name in
-                hanakoView(task: $task, name: name)
+                hanakoView(task: $task, name: name,tasks: $tasks)
             }
         }
     }
@@ -57,9 +58,6 @@ struct phoneView: View {
     }
 }
 
-#Preview {
-    phoneView(selectedTab: .constant(3), task: .constant(""))
-}
 
 extension String: Identifiable {
     public var id: String { self }

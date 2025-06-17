@@ -18,9 +18,10 @@ struct messageView: View {
     @FocusState private var focusedField: Field?
     let ImageTip = ImageSendTip()
     @State var CopyPasteTips = TipGroup(.ordered){
+        copyTip()
         pasteTip()
-        copyPasteTip()
     }
+    @State private var showCompletePopup = false
     var body: some View {
         ZStack{
             VStack{
@@ -85,7 +86,7 @@ struct messageView: View {
                                 focusedField = .field
                                 isInputFocused = true
                             }
-                            .popoverTip(CopyPasteTips.currentTip as? pasteTip)
+                            .popoverTip(pasteTip())
                         
                     }
                     
@@ -167,6 +168,9 @@ struct messageView: View {
         .onTapGesture {
             focusedField = nil
         }
+        .sheet(isPresented: $showCompletePopup) {
+            TaskCompletePopupView()
+        }
     }
     func sendMessage() {
         guard !messageText.isEmpty else { return }
@@ -177,6 +181,7 @@ struct messageView: View {
     public func markTaskDone(with title: String) {
         if let index = tasks.firstIndex(where: { $0.title == title }) {
             tasks[index].isDone = true
+            showCompletePopup = true
         }
     }
     enum Field: Hashable {

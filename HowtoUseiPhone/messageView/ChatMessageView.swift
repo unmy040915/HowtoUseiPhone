@@ -1,10 +1,3 @@
-//
-//  ChatMessageView.swift
-//  HowtoUseiPhone
-//
-//  Created by 牟禮優汰 on 2025/06/16.
-//
-
 import SwiftUI
 import TipKit
 
@@ -13,7 +6,7 @@ struct ChatMessageView: View {
     @Binding var task: String
     @Binding var tasks: [Task]
     @State var CopyPasteTips = TipGroup(.ordered){
-        copyPasteTip()
+        copyTip()
         pasteTip()
     }
     var body: some View {
@@ -34,6 +27,7 @@ struct ChatMessageView: View {
                         .background(message.isFromUser ? Color.green : Color.gray.opacity(0.2))
                         .foregroundColor(message.isFromUser ? .white : .black)
                         .cornerRadius(12)
+                        .popoverTip(CopyPasteTips.currentTip as? copyTip)
                         .contextMenu {
                             Button(action: {
                                 UIPasteboard.general.string = text
@@ -41,7 +35,6 @@ struct ChatMessageView: View {
                                 Label("コピー", systemImage: "doc.on.doc")
                             }
                         }
-                        .popoverTip(CopyPasteTips.currentTip as? copyPasteTip)
                     
                 case .image(let image):
                     image
@@ -62,10 +55,10 @@ struct ChatMessageView: View {
                 .datastoreLocation(.applicationDefault)
             ])
             if task == "コピー&ペーストをしよう" && tasks[3].isDone == false{
-                copyPasteTip.isCopySend = true
+                copyTip.isCopySend = true
                 try? Tips.resetDatastore()
             }else {
-                copyPasteTip.isCopySend = false
+                copyTip.isCopySend = false
             }
             
         }

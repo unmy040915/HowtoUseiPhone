@@ -38,7 +38,7 @@ struct ContentView: View {
                             Image(systemName: "magnifyingglass")
                             Text("検索")
                         }
-                    phoneView(selectedTab: $selectedTab, task: $task)
+                    phoneView(selectedTab: $selectedTab, task: $task,tasks: $callTasks)
                         .tag(3)
                         .tabItem {
                             Image(systemName: "phone")

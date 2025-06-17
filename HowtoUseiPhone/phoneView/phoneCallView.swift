@@ -10,14 +10,16 @@ import SwiftUI
 struct phoneCallView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var task: String
+    @Binding var tasks: [Task]
     let name: String
-
+    @State private var showCompletePopup = false
+    
     var body: some View {
-            VStack{
-                TaskView(task: $task)
-                ZStack{
-//                    Color(red: 128 / 255, green: 131 / 255, blue: 148 / 255)
-//                        .ignoresSafeArea()
+        VStack{
+            TaskView(task: $task)
+            ZStack{
+                //                    Color(red: 128 / 255, green: 131 / 255, blue: 148 / 255)
+                //                        .ignoresSafeArea()
                 VStack(spacing: 20) {
                     Spacer()
                     Text(name)
@@ -27,7 +29,7 @@ struct phoneCallView: View {
                         .foregroundColor(.gray)
                     Spacer()
                         .frame(height: 40)
-
+                    
                     VStack {
                         HStack(spacing: 30) {
                             CallFunctionButton(icon: "mic.slash.fill", label: "消音")
@@ -40,11 +42,14 @@ struct phoneCallView: View {
                             CallFunctionButton(icon: "person.crop.circle", label: "連絡先")
                         }
                     }
-
-
-
+                    
+                    
+                    
                     Button(action: {
                         dismiss()
+                        if task == "電話を切ろう" {
+                            markTaskDone(with: task)
+                        }
                     }) {
                         ZStack {
                             Circle()
@@ -59,30 +64,39 @@ struct phoneCallView: View {
                 .padding()
             }
             
-
-
+            
+            
+        }
+        .sheet(isPresented: $showCompletePopup) {
+            TaskCompletePopupView()
         }
     }
-}
-
-
-struct CallFunctionButton: View {
-    let icon: String
-    let label: String
-
-    var body: some View {
-        VStack {
-            ZStack {
-                Circle()
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(width: 80, height: 80)
-                Image(systemName: icon)
-                    .font(.system(size: 32))
-//                    .foregroundColor(.white)
+    public func markTaskDone(with title: String) {
+        if let index = tasks.firstIndex(where: { $0.title == title }) {
+            tasks[index].isDone = true
+            showCompletePopup = true
+        }
+    }
+    
+    
+    struct CallFunctionButton: View {
+        let icon: String
+        let label: String
+        
+        var body: some View {
+            VStack {
+                ZStack {
+                    Circle()
+                        .fill(Color.gray.opacity(0.2))
+                        .frame(width: 80, height: 80)
+                    Image(systemName: icon)
+                        .font(.system(size: 32))
+                    //                    .foregroundColor(.white)
+                }
+                Text(label)
+                    .font(.caption2)
+                //                .foregroundColor(.white)
             }
-            Text(label)
-                .font(.caption2)
-//                .foregroundColor(.white)
         }
     }
 }
