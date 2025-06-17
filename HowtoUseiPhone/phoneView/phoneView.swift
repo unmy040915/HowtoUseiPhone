@@ -45,7 +45,7 @@ struct phoneView: View {
                 }
             }
             .navigationDestination(item: $selectedName) { name in
-                hanakoView()
+                hanakoView(task: $task, name: name)
             }
         }
     }

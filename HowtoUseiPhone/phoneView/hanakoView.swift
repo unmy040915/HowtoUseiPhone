@@ -2,6 +2,8 @@ import SwiftUI
 
 struct hanakoView: View {
     @State private var isPhoneCallActive = false
+    @Binding var task: String
+    let name: String
 
     var body: some View {
         NavigationStack {
@@ -10,17 +12,17 @@ struct hanakoView: View {
                     .ignoresSafeArea()
                 VStack {
                     VStack(spacing: 16) {
-                        Spacer().frame(height: 40)
+                        TaskView(task: $task)
                         Image(systemName: "person.crop.circle.fill")
                             .resizable()
                             .frame(width: 100, height: 100)
                             .foregroundColor(.gray)
 
-                        Text("ヤマダハナコ")
+                        Text(katakanaName(from: name))
                             .font(.caption)
                             .foregroundColor(.gray)
 
-                        Text("山田花子")
+                        Text(name)
                             .font(.title)
                             .fontWeight(.bold)
 
@@ -39,11 +41,22 @@ struct hanakoView: View {
                     List {}
                 }
 
-                // 遷移先
-                NavigationLink(destination: phoneCallView(), isActive: $isPhoneCallActive) {
+                NavigationLink(destination: phoneCallView(task: $task, name: name), isActive: $isPhoneCallActive) {
                     EmptyView()
                 }
             }
+        }
+    }
+
+    // 名前に応じたカタカナ表記（仮）
+    func katakanaName(from name: String) -> String {
+        switch name {
+        case "山田太郎":
+            return "ヤマダタロウ"
+        case "山田花子":
+            return "ヤマダハナコ"
+        default:
+            return "ヤマダ"
         }
     }
 }
@@ -75,8 +88,4 @@ struct ContactButton: View {
         .cornerRadius(12)
         .shadow(radius: 1)
     }
-}
-
-#Preview {
-    hanakoView()
 }
