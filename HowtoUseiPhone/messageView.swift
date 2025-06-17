@@ -1,29 +1,26 @@
 import SwiftUI
+import TipKit
 
-enum MessageContent {
-    case text(String)
-    case image(Image)
-}
-
-struct ChatMessage: Identifiable {
-    let id = UUID()
-    let content: MessageContent
-    let isFromUser: Bool
-}
 
 struct messageView: View {
     @Binding var selectedTab : Int
     @Binding var task: String
     @State private var showImagePicker = false
     @State private var pendingUIImage: UIImage?
-    
+    @Binding var tasks: [Task]
     @State private var messageText: String = ""
     @State private var messages: [ChatMessage] = [
         ChatMessage(content: .image(Image("dog")), isFromUser: false),
         ChatMessage(content: .text("このテキストをコピーしよう"), isFromUser: false)
     ]
+    
     @FocusState private var isInputFocused: Bool
     @FocusState private var focusedField: Field?
+    let ImageTip = ImageSendTip()
+    @State var CopyPasteTips = TipGroup(.ordered){
+        pasteTip()
+        copyPasteTip()
+    }
     var body: some View {
         ZStack{
             VStack{
@@ -31,64 +28,10 @@ struct messageView: View {
                 Text("山田太郎")
                     .font(.title)
                 Divider()
-                ScrollViewReader { proxy in
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 8) {
-                            ForEach(messages) { message in
-                                HStack(alignment: .top, spacing: 8) {
-                                    if message.isFromUser {
-                                        Spacer()
-                                    } else {
-                                        Image(systemName: "person.circle")
-                                            .resizable()
-                                            .frame(width: 24, height: 24)
-                                    }
-
-                                    Group {
-                                        switch message.content {
-                                        case .text(let text):
-                                            Text(text)
-                                                .padding()
-                                                .background(message.isFromUser ? Color.green : Color.gray.opacity(0.2))
-                                                .foregroundColor(message.isFromUser ? .white : .black)
-                                                .cornerRadius(12)
-                                        case .image(let image):
-                                            image
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 200)
-                                                .cornerRadius(12)
-                                        }
-                                    }
-
-                                    if !message.isFromUser {
-                                        Spacer()
-                                    }
-                                }
-                                .frame(maxWidth: .infinity, alignment: message.isFromUser ? .trailing : .leading)
-                            }
-                            Color.clear
-                                .frame(height: 1)
-                                .id("bottom")
-                        }
-                        .padding()
-                    }
-                    .onChange(of: messages.count) { _ in
-                        withAnimation {
-                            proxy.scrollTo(messages.indices.last, anchor: .bottom)
-                        }
-                    }
-                    .onChange(of: isInputFocused) { newValue in
-                        if newValue {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                withAnimation {
-                                    proxy.scrollTo("bottom", anchor: .bottom)
-                                }
-                            }
-                        }
-                    }
-                }
-                
+                MessageListView(messages: $messages, isInputFocused: $isInputFocused, task: $task,tasks: $tasks,)
+                TipView(messageSendTip(), arrowEdge: .bottom)
+                    .padding(.horizontal)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
                 if let image = pendingUIImage {
                     HStack {
                         ZStack(alignment: .topTrailing) {
@@ -98,7 +41,7 @@ struct messageView: View {
                                 .frame(width: 80, height: 80)
                                 .clipped()
                                 .cornerRadius(10)
-
+                            
                             Button(action: {
                                 pendingUIImage = nil
                             }) {
@@ -122,6 +65,7 @@ struct messageView: View {
                             .font(.system(size:30))
                             .foregroundColor(Color.gray)
                             .padding(.trailing,5)
+                            .popoverTip(ImageTip)
                     }
                     ZStack{
                         Rectangle()
@@ -141,6 +85,7 @@ struct messageView: View {
                                 focusedField = .field
                                 isInputFocused = true
                             }
+                            .popoverTip(CopyPasteTips.currentTip as? pasteTip)
                         
                     }
                     
@@ -148,10 +93,21 @@ struct messageView: View {
                         Button(action: {
                             if !messageText.isEmpty {
                                 messages.append(ChatMessage(content: .text(messageText), isFromUser: true))
+                                if messageText == "このテキストをコピーしよう"{
+                                    if task == "コピー&ペーストをしよう" {
+                                        markTaskDone(with: task)
+                                    }
+                                }
+                                if task == "メッセージを送信しよう" {
+                                    markTaskDone(with: task)
+                                }
                                 messageText = ""
                             } else if let image = pendingUIImage {
                                 let swiftUIImage = Image(uiImage: image)
                                 messages.append(ChatMessage(content: .image(swiftUIImage), isFromUser: true))
+                                if task == "画像を送信しよう" {
+                                    markTaskDone(with: task)
+                                }
                                 pendingUIImage = nil
                             }
                             isInputFocused = false
@@ -171,6 +127,42 @@ struct messageView: View {
                 .padding(.horizontal)
                 
             }
+            .task {
+                try? Tips.configure([
+                    .datastoreLocation(.applicationDefault)
+                ])
+                if task == "メッセージを送信しよう" && tasks[0].isDone == false{
+                    messageSendTip.ismessageSend = true
+                    try? Tips.resetDatastore()
+                }else {
+                    messageSendTip.ismessageSend = false
+                }
+                
+            }
+            .task {
+                try? Tips.configure([
+                    .datastoreLocation(.applicationDefault)
+                ])
+                if task == "画像を送信しよう" && tasks[1].isDone == false{
+                    ImageSendTip.isImageSend = true
+                    try? Tips.resetDatastore()
+                }else {
+                    ImageSendTip.isImageSend = false
+                }
+                
+            }
+            .task {
+                try? Tips.configure([
+                    .datastoreLocation(.applicationDefault)
+                ])
+                if task == "コピー&ペーストをしよう" && tasks[3].isDone == false{
+                    pasteTip.isPasteSend = true
+                    try? Tips.resetDatastore()
+                }else {
+                    pasteTip.isPasteSend = false
+                }
+                
+            }
         }
         .onTapGesture {
             focusedField = nil
@@ -182,12 +174,18 @@ struct messageView: View {
         messageText = ""
         isInputFocused = false
     }
+    public func markTaskDone(with title: String) {
+        if let index = tasks.firstIndex(where: { $0.title == title }) {
+            tasks[index].isDone = true
+        }
+    }
     enum Field: Hashable {
         case field
     }
+    
 }
 
 
 #Preview {
-    messageView(selectedTab: .constant(4), task: .constant(.init()))
+    messageView(selectedTab: .constant(4), task: .constant(.init()), tasks: .constant(.init()))
 }

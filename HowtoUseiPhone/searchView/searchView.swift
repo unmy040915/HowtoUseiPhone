@@ -195,7 +195,7 @@ struct searchView: View {
         case Top
         case Bottom
     }
-    func markTaskDone(with title: String) {
+    public func markTaskDone(with title: String) {
         if let index = tasks.firstIndex(where: { $0.title == title }) {
             tasks[index].isDone = true
         }

@@ -19,7 +19,7 @@ struct ContentView: View {
         Task(title: "メッセージを送信しよう", isDone: false),
         Task(title: "画像を送信しよう", isDone: false),
         Task(title: "画像の保存をしよう", isDone: false),
-        Task(title: "コピーアンドペーストをしよう", isDone: false),
+        Task(title: "コピー&ペーストをしよう", isDone: false),
         Task(title: "文字の取り消し操作をしよう", isDone: false)
     ]
     var body: some View {
@@ -44,7 +44,7 @@ struct ContentView: View {
                             Image(systemName: "phone")
                             Text("電話")
                         }
-                    messageView(selectedTab: $selectedTab, task: $task)
+                    messageView(selectedTab: $selectedTab, task: $task, tasks: $messageTasks)
                         .tag(4)
                         .tabItem {
                             Image(systemName: "message")

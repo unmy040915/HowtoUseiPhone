@@ -31,3 +31,45 @@ struct CrossTip: Tip{
         ]
     }
 }
+struct messageSendTip: Tip {
+    @Parameter static var ismessageSend: Bool = false
+    var title: Text{ Text("テキストを入力しよう")
+    }
+    var rules: [Rule] {
+        [
+            #Rule(Self.$ismessageSend) { $0 == true }
+        ]
+    }
+}
+struct ImageSendTip: Tip {
+    @Parameter static var isImageSend: Bool = false
+    var title: Text{ Text("ここをタップして画像を送信")
+    }
+    var rules: [Rule] {
+        [
+            #Rule(Self.$isImageSend) { $0 == true }
+        ]
+    }
+}
+
+struct copyPasteTip: Tip {
+    @Parameter static var isCopySend: Bool = false
+    var title: Text{ Text("ここを長押ししてコピー")
+    }
+    var rules: [Rule] {
+        [
+            #Rule(Self.$isCopySend) { $0 == true }
+        ]
+    }
+}
+
+struct pasteTip: Tip {
+    @Parameter static var isPasteSend: Bool = false
+    var title: Text{ Text("ここを長押ししてペースト")
+    }
+    var rules: [Rule] {
+        [
+            #Rule(Self.$isPasteSend) { $0 == true }
+        ]
+    }
+}
