@@ -3,11 +3,35 @@ import SwiftUI
 struct TaskView: View {
     @Binding var task: String 
     var body: some View {
-        
-        Text("次のクエスト")
-            .font(.title)
-        Text("\(task)")
-            .font(.system(size:32))
+        ZStack{
+            Rectangle()
+                .frame(height: 90)
+                .foregroundStyle(.black)
+                .cornerRadius(16)
+                .offset(x:10,y: 10)
+                .padding()
+            Rectangle()
+                .frame(height: 90)
+                .foregroundStyle(.white)
+                .cornerRadius(16)
+                .padding()
+            Rectangle()
+                .frame(height: 90)
+                .foregroundStyle(.clear)
+                .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color.black, lineWidth: 3)
+                )
+                .padding()
+                
+            VStack{
+                Text("次のクエスト")
+                    .font(.title)
+                Text("\(task)")
+                    .font(.system(size:32))
+            }
+        }
+
     }
 }
 struct StatefulPreviewWrapper<Value, Content: View>: View {

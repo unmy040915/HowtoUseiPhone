@@ -7,6 +7,6 @@ struct HowtoUseiPhoneApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Todo.self)
+        .modelContainer(for: TaskData.self)
     }
 }

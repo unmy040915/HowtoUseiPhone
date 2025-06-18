@@ -1,10 +1,3 @@
-//
-//  TaskCompletePopup.swift
-//  HowtoUseiPhone
-//
-//  Created by 牟禮優汰 on 2025/06/17.
-//
-
 import SwiftUI
 
 struct TaskCompletePopupView: View {
