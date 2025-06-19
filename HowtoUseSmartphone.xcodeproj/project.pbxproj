@@ -24,18 +24,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A52806CF2DF44258009786B4 /* HowtoUseiPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowtoUseiPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A52806DC2DF4425B009786B4 /* HowtoUseiPhoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HowtoUseiPhoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A52806E62DF4425B009786B4 /* HowtoUseiPhoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HowtoUseiPhoneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52806CF2DF44258009786B4 /* HowtoUseSmartphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowtoUseSmartphone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52806DC2DF4425B009786B4 /* HowtoUseSmartphoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HowtoUseSmartphoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52806E62DF4425B009786B4 /* HowtoUseSmartphoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HowtoUseSmartphoneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A5C84E952E019DFE0018EFD9 /* Exceptions for "HowtoUseiPhone" folder in "HowtoUseiPhone" target */ = {
+		A5C84E952E019DFE0018EFD9 /* Exceptions for "HowtoUseiPhone" folder in "HowtoUseSmartphone" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = A52806CE2DF44258009786B4 /* HowtoUseiPhone */;
+			target = A52806CE2DF44258009786B4 /* HowtoUseSmartphone */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -43,19 +43,19 @@
 		A52806D12DF44258009786B4 /* HowtoUseiPhone */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A5C84E952E019DFE0018EFD9 /* Exceptions for "HowtoUseiPhone" folder in "HowtoUseiPhone" target */,
+				A5C84E952E019DFE0018EFD9 /* Exceptions for "HowtoUseiPhone" folder in "HowtoUseSmartphone" target */,
 			);
 			path = HowtoUseiPhone;
 			sourceTree = "<group>";
 		};
-		A52806DF2DF4425B009786B4 /* HowtoUseiPhoneTests */ = {
+		A52806DF2DF4425B009786B4 /* HowtoUseSmartphoneTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = HowtoUseiPhoneTests;
+			path = HowtoUseSmartphoneTests;
 			sourceTree = "<group>";
 		};
-		A52806E92DF4425B009786B4 /* HowtoUseiPhoneUITests */ = {
+		A52806E92DF4425B009786B4 /* HowtoUseSmartphoneUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = HowtoUseiPhoneUITests;
+			path = HowtoUseSmartphoneUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -89,8 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				A52806D12DF44258009786B4 /* HowtoUseiPhone */,
-				A52806DF2DF4425B009786B4 /* HowtoUseiPhoneTests */,
-				A52806E92DF4425B009786B4 /* HowtoUseiPhoneUITests */,
+				A52806DF2DF4425B009786B4 /* HowtoUseSmartphoneTests */,
+				A52806E92DF4425B009786B4 /* HowtoUseSmartphoneUITests */,
 				A52806D02DF44258009786B4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,9 +98,9 @@
 		A52806D02DF44258009786B4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A52806CF2DF44258009786B4 /* HowtoUseiPhone.app */,
-				A52806DC2DF4425B009786B4 /* HowtoUseiPhoneTests.xctest */,
-				A52806E62DF4425B009786B4 /* HowtoUseiPhoneUITests.xctest */,
+				A52806CF2DF44258009786B4 /* HowtoUseSmartphone.app */,
+				A52806DC2DF4425B009786B4 /* HowtoUseSmartphoneTests.xctest */,
+				A52806E62DF4425B009786B4 /* HowtoUseSmartphoneUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,9 +108,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A52806CE2DF44258009786B4 /* HowtoUseiPhone */ = {
+		A52806CE2DF44258009786B4 /* HowtoUseSmartphone */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A52806F02DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseiPhone" */;
+			buildConfigurationList = A52806F02DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseSmartphone" */;
 			buildPhases = (
 				A52806CB2DF44258009786B4 /* Sources */,
 				A52806CC2DF44258009786B4 /* Frameworks */,
@@ -123,16 +123,16 @@
 			fileSystemSynchronizedGroups = (
 				A52806D12DF44258009786B4 /* HowtoUseiPhone */,
 			);
-			name = HowtoUseiPhone;
+			name = HowtoUseSmartphone;
 			packageProductDependencies = (
 			);
 			productName = HowtoUseiPhone;
-			productReference = A52806CF2DF44258009786B4 /* HowtoUseiPhone.app */;
+			productReference = A52806CF2DF44258009786B4 /* HowtoUseSmartphone.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A52806DB2DF4425B009786B4 /* HowtoUseiPhoneTests */ = {
+		A52806DB2DF4425B009786B4 /* HowtoUseSmartphoneTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A52806F32DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseiPhoneTests" */;
+			buildConfigurationList = A52806F32DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseSmartphoneTests" */;
 			buildPhases = (
 				A52806D82DF4425B009786B4 /* Sources */,
 				A52806D92DF4425B009786B4 /* Frameworks */,
@@ -144,18 +144,18 @@
 				A52806DE2DF4425B009786B4 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				A52806DF2DF4425B009786B4 /* HowtoUseiPhoneTests */,
+				A52806DF2DF4425B009786B4 /* HowtoUseSmartphoneTests */,
 			);
-			name = HowtoUseiPhoneTests;
+			name = HowtoUseSmartphoneTests;
 			packageProductDependencies = (
 			);
 			productName = HowtoUseiPhoneTests;
-			productReference = A52806DC2DF4425B009786B4 /* HowtoUseiPhoneTests.xctest */;
+			productReference = A52806DC2DF4425B009786B4 /* HowtoUseSmartphoneTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A52806E52DF4425B009786B4 /* HowtoUseiPhoneUITests */ = {
+		A52806E52DF4425B009786B4 /* HowtoUseSmartphoneUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A52806F62DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseiPhoneUITests" */;
+			buildConfigurationList = A52806F62DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseSmartphoneUITests" */;
 			buildPhases = (
 				A52806E22DF4425B009786B4 /* Sources */,
 				A52806E32DF4425B009786B4 /* Frameworks */,
@@ -167,13 +167,13 @@
 				A52806E82DF4425B009786B4 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				A52806E92DF4425B009786B4 /* HowtoUseiPhoneUITests */,
+				A52806E92DF4425B009786B4 /* HowtoUseSmartphoneUITests */,
 			);
-			name = HowtoUseiPhoneUITests;
+			name = HowtoUseSmartphoneUITests;
 			packageProductDependencies = (
 			);
 			productName = HowtoUseiPhoneUITests;
-			productReference = A52806E62DF4425B009786B4 /* HowtoUseiPhoneUITests.xctest */;
+			productReference = A52806E62DF4425B009786B4 /* HowtoUseSmartphoneUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -199,7 +199,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A52806CA2DF44258009786B4 /* Build configuration list for PBXProject "HowtoUseiPhone" */;
+			buildConfigurationList = A52806CA2DF44258009786B4 /* Build configuration list for PBXProject "HowtoUseSmartphone" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -213,9 +213,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A52806CE2DF44258009786B4 /* HowtoUseiPhone */,
-				A52806DB2DF4425B009786B4 /* HowtoUseiPhoneTests */,
-				A52806E52DF4425B009786B4 /* HowtoUseiPhoneUITests */,
+				A52806CE2DF44258009786B4 /* HowtoUseSmartphone */,
+				A52806DB2DF4425B009786B4 /* HowtoUseSmartphoneTests */,
+				A52806E52DF4425B009786B4 /* HowtoUseSmartphoneUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -271,12 +271,12 @@
 /* Begin PBXTargetDependency section */
 		A52806DE2DF4425B009786B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A52806CE2DF44258009786B4 /* HowtoUseiPhone */;
+			target = A52806CE2DF44258009786B4 /* HowtoUseSmartphone */;
 			targetProxy = A52806DD2DF4425B009786B4 /* PBXContainerItemProxy */;
 		};
 		A52806E82DF4425B009786B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A52806CE2DF44258009786B4 /* HowtoUseiPhone */;
+			target = A52806CE2DF44258009786B4 /* HowtoUseSmartphone */;
 			targetProxy = A52806E72DF4425B009786B4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -414,11 +414,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HowtoUseiPhone/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -443,11 +445,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HowtoUseiPhone/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -476,7 +480,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HowtoUseiPhone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HowtoUseiPhone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HowtoUseSmartphone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HowtoUseSmartphone";
 			};
 			name = Debug;
 		};
@@ -495,7 +499,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HowtoUseiPhone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HowtoUseiPhone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HowtoUseSmartphone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HowtoUseSmartphone";
 			};
 			name = Release;
 		};
@@ -536,7 +540,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A52806CA2DF44258009786B4 /* Build configuration list for PBXProject "HowtoUseiPhone" */ = {
+		A52806CA2DF44258009786B4 /* Build configuration list for PBXProject "HowtoUseSmartphone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A52806EE2DF4425B009786B4 /* Debug */,
@@ -545,7 +549,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A52806F02DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseiPhone" */ = {
+		A52806F02DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseSmartphone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A52806F12DF4425B009786B4 /* Debug */,
@@ -554,7 +558,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A52806F32DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseiPhoneTests" */ = {
+		A52806F32DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseSmartphoneTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A52806F42DF4425B009786B4 /* Debug */,
@@ -563,7 +567,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A52806F62DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseiPhoneUITests" */ = {
+		A52806F62DF4425B009786B4 /* Build configuration list for PBXNativeTarget "HowtoUseSmartphoneUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A52806F72DF4425B009786B4 /* Debug */,
